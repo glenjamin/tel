@@ -8,6 +8,8 @@ lett is designed to provide a similar feature to [RSpec][rspec]'s [let function]
 [mocha]: http://visionmedia.github.io/mocha/
 [let-on-so]: http://stackoverflow.com/questions/5359558/when-to-use-rspec-let
 
+[![build status](https://secure.travis-ci.org/glenjamin/lett.png)](http://travis-ci.org/glenjamin/lett)
+
 Install
 -------
 
