@@ -1,76 +1,76 @@
 var assert = require('assert');
 
-var Lett = require('../lett.js');
+var Tel = require('../tel.js');
 
-describe('Using Lett', function() {
+describe('Using tel', function() {
   // Create a new container for each execution
-  var lett;
-  beforeEach(function() { lett = Lett(); });
+  var tel;
+  beforeEach(function() { tel = Tel(); });
 
   describe('get/set concrete values', function() {
     beforeEach(function() {
-      lett('array', []);
-      lett('number', 5);
+      tel('array', []);
+      tel('number', 5);
     })
     it('should provide access to values', function() {
-      assert.equal(0, lett.array.length);
-      lett.array.push(lett.number);
-      assert.equal(1, lett.array.length);
-      assert.equal(5, lett.array[0]);
+      assert.equal(0, tel.array.length);
+      tel.array.push(tel.number);
+      assert.equal(1, tel.array.length);
+      assert.equal(5, tel.array[0]);
     })
     it('tears down on subsequence test runs', function() {
-      assert.equal(0, lett.array.length);
-      assert.equal(5, lett.number);
+      assert.equal(0, tel.array.length);
+      assert.equal(5, tel.number);
     })
   })
 
   describe('get/set lazy values', function() {
     beforeEach(function() {
-      lett('array', function() { return [] });
-      lett('number', function() { return 5 });
+      tel('array', function() { return [] });
+      tel('number', function() { return 5 });
     })
     it('should provide access to memoised values', function() {
-      assert.equal(lett.array.length, 0);
-      lett.array.push(lett.number);
-      assert.equal(lett.array.length, 1);
-      assert.equal(lett.array[0], 5);
+      assert.equal(tel.array.length, 0);
+      tel.array.push(tel.number);
+      assert.equal(tel.array.length, 1);
+      assert.equal(tel.array[0], 5);
     })
     it('tears down on subsequent test runs', function() {
-      assert.equal(lett.array.length, 0);
-      assert.equal(lett.number, 5);
+      assert.equal(tel.array.length, 0);
+      assert.equal(tel.number, 5);
     })
   })
 
   describe('dependant values', function() {
     beforeEach(function() {
-      lett('array', function() { return [lett.a, lett.b] })
+      tel('array', function() { return [tel.a, tel.b] })
       // Can be concrete
-      lett('a', 'foo')
+      tel('a', 'foo')
       // Or lazy
-      lett('b', function() { return 'bar' })
+      tel('b', function() { return 'bar' })
     })
     it('should resolve dependencies of values', function() {
-      assert.deepEqual(lett.array, ['foo', 'bar']);
+      assert.deepEqual(tel.array, ['foo', 'bar']);
     })
     it('should be overridable via property', function() {
-      lett.a = 'baz';
-      assert.deepEqual(lett.array, ['baz', 'bar']);
+      tel.a = 'baz';
+      assert.deepEqual(tel.array, ['baz', 'bar']);
     })
     it('has no effect if overridden after realised', function() {
-      assert.deepEqual(lett.array, ['foo', 'bar']);
-      lett.a = 'baz';
-      assert.equal(lett.a, 'baz');
-      assert.deepEqual(lett.array, ['foo', 'bar']);
+      assert.deepEqual(tel.array, ['foo', 'bar']);
+      tel.a = 'baz';
+      assert.equal(tel.a, 'baz');
+      assert.deepEqual(tel.array, ['foo', 'bar']);
     })
     it('tears down on subsequent test runs', function() {
-      assert.deepEqual(lett.array, ['foo', 'bar']);
+      assert.deepEqual(tel.array, ['foo', 'bar']);
     })
     context('at a later time', function() {
       beforeEach(function() {
-        lett('b', function() { return 'baz' })
+        tel('b', function() { return 'baz' })
       })
       it('can override properties', function() {
-        assert.deepEqual(lett.array, ['foo', 'baz']);
+        assert.deepEqual(tel.array, ['foo', 'baz']);
       })
     })
   })
@@ -88,22 +88,22 @@ describe('Using Lett', function() {
 
     beforeEach(function() {
       counter = 0;
-      lett('sql', 'SELECT * FROM nowhere');
-      lett('result', function(done) {
-        dbquery(lett.sql, done)
+      tel('sql', 'SELECT * FROM nowhere');
+      tel('result', function(done) {
+        dbquery(tel.sql, done)
       })
     })
 
     it('should run some SQL', function(done) {
-      lett.result(function(err, results) {
+      tel.result(function(err, results) {
         assert.deepEqual(results, ['nowhere']);
         done(err);
       })
     })
 
     it('should be able to run different SQL', function(done) {
-      lett.sql = 'SELECT * FROM somewhere';
-      lett.result(function(err, results) {
+      tel.sql = 'SELECT * FROM somewhere';
+      tel.result(function(err, results) {
         assert.deepEqual(results, ['somewhere']);
         done(err);
       })
@@ -119,9 +119,9 @@ describe('Using Lett', function() {
         done();
       }
 
-      lett.result(function(err, results, counter) {
+      tel.result(function(err, results, counter) {
         inc(counter)
-        lett.result(function(err, results, counter) {
+        tel.result(function(err, results, counter) {
           inc(counter);
         })
         inc('bar');

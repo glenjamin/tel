@@ -1,14 +1,14 @@
 module.exports = function() {
   "use strict";
 
-  function lett(name, value) {
+  function tel(name, value) {
 
     var lazy = (typeof value === 'function');
     var async = lazy && value.length == 1;
 
     var is_realised, realised;
 
-    Object.defineProperty(lett, name, {
+    Object.defineProperty(tel, name, {
 
       get: function() {
         if (async) {
@@ -50,5 +50,5 @@ module.exports = function() {
 
   }
 
-  return lett;
+  return tel;
 }
