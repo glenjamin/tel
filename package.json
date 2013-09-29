@@ -1,0 +1,25 @@
+{
+  "name": "lett",
+  "version": "0.1.0",
+  "description": "Super simple DI for JavaScript, targetted mainly at spec test setup",
+  "main": "lett.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/glenjamin/lett.git"
+  },
+  "keywords": [
+    "mocha",
+    "di"
+  ],
+  "author": "Glen Mailer <glenjamin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glenjamin/lett/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.7.4"
+  }
+}
