@@ -1,6 +1,9 @@
-var assert = require('assert');
-
-var Tel = require('../tel.js');
+if (typeof require === 'function') {
+  var Tel = require('../tel.js');
+  var assert = require('chai').assert;
+} else {
+  var assert = chai.assert;
+}
 
 describe('Using tel', function() {
   // Create a new container for each execution
