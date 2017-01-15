@@ -5,7 +5,7 @@ tel is designed to provide a similar feature to [RSpec][rspec]'s [let function][
 
 [rspec]: http://rspec.info
 [let]: https://www.relishapp.com/rspec/rspec-core/v/2-11/docs/helper-methods/let-and-let
-[mocha]: http://visionmedia.github.io/mocha/
+[mocha]: http://mochajs.org/
 [let-on-so]: http://stackoverflow.com/questions/5359558/when-to-use-rspec-let
 
 [![build status](https://secure.travis-ci.org/glenjamin/tel.png)](http://travis-ci.org/glenjamin/tel)
